@@ -1,0 +1,37 @@
+SERVER.JS:
+
+npm i nodemon -D: configuramos en el package.json: $"start": "nodemon server.js"$  enotonces cada vez que ponga npm starse ejecuta esa
+La dependencia principal es SERVER.
+
+Server: IOServer: es un reenombre que le asignamos a la variable, puede ir cualquier nombre, io o como nos guste, esto nos sirve para que no haya
+incovenientes cuando utilicemos la dependencia o funcionabilidad de socket. Para diferenciar el server de http.
+creamos el puerto
+app.listen no va ❌ ¿Por que? Porque necesitamos levantar el servidor principal: 'httpServer' entonces es: httpServer.listen
+pasamos el puerto.
+
+INDEX.JS:
+Establecemos conección con el back.
+creamos la funcion render: vamos a recibir la lista de mensajes quemadas, vamos a mapear con el nombre item para que itere 1x1 y nos muestre en el front.
+creamos el template string con el nombre item + nombre | item + msj. Luego ponemos un join con espacio para que haga un espacio y salto de linea 
+Escuchamos al back recibiendo el parametro nombre y data: tenemos que procesarla, creamos una funcion con el nombre render y recibe data.
+
+INDEX.HTML: 
+En el formulario ponemos submit y como valor le pasamos el (retorno + nomrbe de la funcion).
+- captura los id y accedemos con value para ver los resultados y lo almacenamos en las variable.
+Creamos un objeto:
+-usando los mismo nombres que pusimos en el server. 
+Emitimos con socket.
+Retrnamos false porque estamos ejecutando en una funcion en el index entonces detenemos el congelamiento
+
+__________________________________________________________________________________________________________
+
+Del lado del server, vamos a escuchar al socket, creamos la funcion y pusheamos al array la data.
+Tenemos que reenviar nuevamente al cliente para que la procese y la renderice en nuestro archivo html.
+Tenemos que hacer un emit a todos lo clientes, como lo hacemos? con $io.sockets.emit$. (socket lleva una 's' al final)
+usaremos como parametro el array asi tiene los mensajes anteriores y adicional los mensajes que envia en el momento.
+
+DATO:
+const PORT = process.env.PORT || 8080;
+
+process.env.PORT ¿Que significa?
+Va a tomar una variable de entorno de glitch y si glitch no se lo asigna entonces toma por defecto el puerto que le asignamos nosotros.
